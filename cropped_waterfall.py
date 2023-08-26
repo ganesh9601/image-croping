@@ -19,6 +19,10 @@ hexagon_points = np.array([
     (200, 400), (100, 300), (150, 200),
     (250, 200), (300, 300), (250, 400)
 ], np.int32)
+pentagon_points = np.array([
+    (100, 600), (100, 300), (400, 50),
+    (800, 300), (800, 600),
+], np.int32)
 # print(hexagon_points)
 # Create masks for different shapes
 rect_mask = np.zeros(image.shape[:2], dtype=np.uint8)
@@ -33,14 +37,19 @@ cv2.fillPoly(triangle_mask, [triangle_points], 255)
 hexagon_mask = np.zeros(image.shape[:2], dtype=np.uint8)
 cv2.fillPoly(hexagon_mask, [hexagon_points], 255)
 
+pentagon_mask = np.zeros(image.shape[:2], dtype=np.uint8)
+cv2.fillPoly(pentagon_mask, [pentagon_points], 255)
+qaqqq
 # Apply masks to the image
 cropped_rect = cv2.bitwise_and(image, image, mask=rect_mask)
 cropped_square = cv2.bitwise_and(image, image, mask=square_mask)
 cropped_triangle = cv2.bitwise_and(image, image, mask=triangle_mask)
 cropped_hexagon = cv2.bitwise_and(image, image, mask=hexagon_mask)
+cropped_pentagon = cv2.bitwise_and(image, image, mask=pentagon_mask)
 
 # Save the cropped images
 cv2.imwrite('cropped_rectangle.jpg', cropped_rect)
 cv2.imwrite('cropped_square.jpg', cropped_square)
 cv2.imwrite('cropped_triangle.jpg', cropped_triangle)
 cv2.imwrite('cropped_hexagon.jpg', cropped_hexagon)
+cv2.imwrite('cropped_pentagone.jpg', cropped_pentagon)
